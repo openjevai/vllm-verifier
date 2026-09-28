@@ -114,7 +114,10 @@ class DecisionEngine:
         started = time.perf_counter()
         if not requests or len(requests) > self.config.max_requests:
             raise ValueError("Request count is outside the engine admission limit")
-        if any(r.model not in {self.model, "jev-latest", "diffusion-jev"} for r in requests):
+        if any(
+            r.model not in {self.model, "jev-latest", "openjev", "diffusion-jev"}
+            for r in requests
+        ):
             raise ValueError("Unknown model")
         # Serialize shared state once, then tokenize each complete chat with the real template.
         states = [json.dumps(r.state, ensure_ascii=False, allow_nan=False) for r in requests]

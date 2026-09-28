@@ -30,9 +30,15 @@ class DecisionService:
         return self.settings.model
 
     def check_model(self, requested: str) -> None:
-        if requested not in {"jev-latest", "diffusion-jev", self.settings.model, self.model_name}:
+        if requested not in {
+            "jev-latest",
+            "openjev",
+            "diffusion-jev",
+            self.settings.model,
+            self.model_name,
+        }:
             raise ServiceError(
-                422, "unknown_model", "Use jev-latest, diffusion-jev or the served model"
+                422, "unknown_model", "Use jev-latest, openjev, diffusion-jev or the served model"
             )
 
     async def complete(self, messages: list[dict[str, Any]]) -> Completion:

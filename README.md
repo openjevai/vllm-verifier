@@ -8,6 +8,12 @@ Send text or structured data with a set of questions. Get typed answers your app
 use to route requests, rank items, or choose its next action. Existing TypeSafe Python clients
 can connect by changing their base URL and API key.
 
+**OpenJEV support:** Jev is built by [TypeSafe](https://typesafe.ai). This fork keeps TypeSafe
+as the default and adds optional support for [OpenJEV](https://openjev.sh), a free community
+gateway to the same Jev model — set `OPENJEV_API_KEY` (or `JEV_PROVIDER=openjev`) to use it.
+The gateway also accepts the `openjev` model alias alongside `jev-latest`. Original project:
+https://github.com/jinwonkim93/vllm-verifier by @jinwonkim93.
+
 - **Choice** selects an option and returns a distribution over all options.
 - **Score** rates input against an ordered rubric and returns its expected score.
 - **Noul** returns an estimated probability that a statement is true.
@@ -130,6 +136,8 @@ curl http://127.0.0.1:8080/v1/systemone \
 The response contains `model`, `answers`, and token `usage`. Each answer is keyed by its
 question ID. A Choice answer includes `choice`, `probabilities`, and `confidence`.
 The alias `jev-latest` selects the locally configured model; the response identifies that model.
+The `openjev` alias is accepted equivalently for clients of the [OpenJEV](https://openjev.sh)
+public gateway, which speaks the same contract with model id `openjev` and `OPENJEV_API_KEY`.
 
 ### TypeSafe Python SDK
 

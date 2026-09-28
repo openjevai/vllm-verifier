@@ -68,8 +68,16 @@ class DirectDecisionService:
         )
 
     async def evaluate(self, request: SystemOneRequest) -> SystemOneResponse:
-        if request.model not in {MODEL, "Decision-1.0-Kai-0.6B", "jev-latest", "diffusion-jev"}:
-            raise ServiceError(422, "unknown_model", "Use jev-latest or the served model")
+        if request.model not in {
+            MODEL,
+            "Decision-1.0-Kai-0.6B",
+            "jev-latest",
+            "openjev",
+            "diffusion-jev",
+        }:
+            raise ServiceError(
+                422, "unknown_model", "Use jev-latest, openjev or the served model"
+            )
         if not await self.ready():
             raise ServiceError(503, "engine_unavailable", "Decision engine is not ready")
         future: asyncio.Future[SystemOneResponse] = asyncio.get_running_loop().create_future()

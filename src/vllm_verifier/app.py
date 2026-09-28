@@ -127,7 +127,7 @@ def create_app(settings: Settings | None = None, backend: Backend | None = None)
                     "release_date describes this adapter, not the model weights.",
                     "release_date": "2026-09-22",
                 }
-                for name in dict.fromkeys(["jev-latest", "diffusion-jev", actual])
+                for name in dict.fromkeys(["jev-latest", "openjev", "diffusion-jev", actual])
             ]
         }
 
